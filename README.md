@@ -43,7 +43,7 @@ python -u Evaluation/visualize_DFM.py
 
 * Training models
 ```
-python -u train.py           --backbone_model ViT  --weight_alpha 1 --lr 0.01 --dataset imagenet10  --band  \   --save_dir results_224/imagenet10/ --decoder 0  --image_size 224     --num_class 10     --p 0   --masks ViT\.pkl     > results_224/imagenet10/ViTen_AF_v0.out
+python -u train.py   --backbone_model resnet18 --lr 0.01 --dataset imagenet10   --save_dir results/  --image_size 224  --num_class 10    
 ```
 
 ## Citation
