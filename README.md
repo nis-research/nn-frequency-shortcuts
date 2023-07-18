@@ -28,12 +28,18 @@ pip install -r requirements.txt
 
 * Computing DFM
 ```
-python -u Evaluation/test_rank_vit.py  --backbone_model vit --model_path /home/wangs1/HFC/results_224/imagenet10/ViT0\ /version_3/checkpoints/last.ckpt     --patch_size 2   
+python -u Evaluation/test_rank.py  --backbone_model resnet18 --model_path /checkpoints/last.ckpt     --patch_size 2   
 
 ```
 * Computing ADCS
+```
+python -u Evaluation/compute_ADCS.py
+```
 
 * Visualization
+```
+python -u Evaluation/visualize_DFM.py
+```
 
 * Training models
 ```
