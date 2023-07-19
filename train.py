@@ -1,34 +1,22 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 import argparse
-import torchvision
 import torchvision.transforms as transforms
 from torchvision.datasets import ImageFolder
 import os
-import numpy as np
 from datasets.CIFAR import CIFAR
 from datasets.Synthetic import Synthetic
 from pytorch_lightning.core.lightning import LightningModule
 import pytorch_lightning as pl
-from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
+from pytorch_lightning.callbacks import ModelCheckpoint
 import torchmetrics
 import timm
 
-import pickle
-import numpy.fft as fft
-# from pytorch_lightning import metrics
-from torch.optim.lr_scheduler import ReduceLROnPlateau,StepLR
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 from pytorch_lightning.loggers.tensorboard import TensorBoardLogger
-import backbone.resnet9 as resnet9
 import backbone.resnet as resnet
-import backbone.densenet as densenet
 import backbone.vgg as vgg
 import backbone.alexnet as alexnet
-from blocks.decoder import Decoder
-from blocks.resnet.Blocks import Upconvblock
-
-from torch.utils.data import Dataset
 
 
 class Model(LightningModule):
