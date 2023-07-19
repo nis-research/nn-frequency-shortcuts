@@ -1,8 +1,4 @@
 scipy
-numpy
-pickle
-argparse
-os
 matplotlib
 torchvision==0.14.0
 torch==1.13.0
