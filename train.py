@@ -142,7 +142,7 @@ class Model(LightningModule):
                 transforms.Pad(4),
                 transforms.RandomHorizontalFlip(),
                 transforms.RandomResizedCrop(self.image_size),
-                # transforms.AugMix(),# transforms.AutoAugment(),
+                # transforms.AugMix(),# transforms.AutoAugment(), # change here to add other augmentations
                 transforms.ToTensor(),
                 transforms.Normalize([0.479838, 0.470448, 0.429404], [0.258143, 0.252662, 0.272406])
                 # normalize

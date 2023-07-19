@@ -22,6 +22,10 @@ cd nn-frequency-shortcuts
 
 * Installation
 	* Python 3.9.12, cuda-11.3, cuda-11.3_cudnn-8.2
+		* You can create a virtual environment with conda
+	```
+	conda create -n debugenv  python=3.9 anaconda
+	```
 
 	```
 	pip install -r requirements.txt
