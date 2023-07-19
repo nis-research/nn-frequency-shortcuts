@@ -10,12 +10,12 @@ module load nvidia/cuda-11.3_cudnn-8.2
 module load anaconda3/2022.05
 
 #source activate
-source activate debugenv
+
 
 echo $SLURM_NODELIST
 
 cd nn-frequency-shortcuts
-
+source activate debugenv
 # python -u train.py --backbone_model ViT   --lr 0.01 --dataset imagenet10  --save_dir results_224/imagenet10/  --image_size 224     --num_class 10   > results_224/imagenet10/ViTen_AF_v0.out
 
 # python -u train.py --backbone_model alex  -lr 0.01 --dataset imagenet10   --save_dir /home/wangs1/HFC/results/imagenet10/  --image_size 224     --num_class 10             > /home/wangs1/HFC/results/imagenet10/alexen_AF_v1.out
