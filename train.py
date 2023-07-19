@@ -194,7 +194,7 @@ class Model(LightningModule):
 
 
 def main(args):
-    backbone = ['resnet9','resnet18', 'resnet50','resnet101','densenet121', 'densent169', 'vgg16'] 
+    backbone = ['resnet18', 'resnet34', 'resnet50','resnet101', 'alex', 'ViT', 'vgg16'] 
     print(torch.cuda.device_count())
     if args.backbone_model == 'resnet18':
         from blocks.resnet.Blocks import BasicBlock
@@ -208,24 +208,15 @@ def main(args):
     elif args.backbone_model == 'resnet101':
         from blocks.resnet.Blocks import Bottleneck
         backbone_model = resnet.ResNet(Bottleneck[3,4,23,3],args.num_class)
-    elif args.backbone_model == 'resnet9':
-        backbone_model = resnet9.ResNet9(args.num_class)
     elif args.backbone_model == 'alex':
         backbone_model = alexnet.AlexNet(args.num_class)
-    elif args.backbone_model == 'densenet121':
-        from blocks.densenet.Blocks import Bottleneck
-        backbone_model = densenet.DenseNet(Bottleneck, [6,12,24,16], growth_rate=32, reduction=0.5, num_classes=args.num_class)
     elif args.backbone_model == 'ViT':
-        backbone_model = timm.create_model('vit_base_patch8_224', pretrained=True)
+        backbone_model = timm.create_model('vit_base_patch8_224', pretrained=False)
     
 
-   
-
- 
+    logger = TensorBoardLogger(args.save_dir, name=args.backbone_model)
     
-    logger = TensorBoardLogger(args.save_dir, name=args.backbone_model+str(args.decoder)+ args.band)#
-    
-    model = Model(backbone_model, args.lr,args.num_class,args.dataset,args.image_size,args.band, args.special)#
+    model = Model(backbone_model, args.lr,args.num_class,args.dataset,args.image_size,args.band, args.special)
     maxepoch = 200
     checkpoints_callback = ModelCheckpoint(save_last=True,save_top_k=-1)
     trainer = pl.Trainer(enable_progress_bar=False,logger=logger, callbacks=[checkpoints_callback], gpus=-1, max_epochs=maxepoch) # accelerator='dp',
@@ -244,13 +235,15 @@ if __name__ == '__main__':
                     help='size of images in dataset')
     parser.add_argument('--num_class', type=int, default= 10,
                     help='number of classes in dataset')
-    parser.add_argument('--dataset', type=str, default='cifar',
+    parser.add_argument('--dataset', type=str, default='imagenet10',
                     help='dataset')
     parser.add_argument('--lr', type=float, default=0.001,
                     help='learning rate')            
     parser.add_argument('--save_dir', type=str, default='results/')
    
     args = parser.parse_args()
-    if not os.path.exists(args.save_dir):
-        os.makedirs(args.save_dir)
+    if not os.path.exists(args.save_dir+'/'+args.backbone_model):
+        os.makedirs(args.save_dir+'/'+args.backbone_model)
+    
+    
     main(args)
