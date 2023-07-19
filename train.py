@@ -53,7 +53,7 @@ class Model(LightningModule):
         x, y = batch
 
         criterion1 = nn.CrossEntropyLoss()
-        criterion2 = nn.BCELoss()
+       
         # _, y_hat = self(x)
         y_hat = self(x)
         #print(y_hat)
@@ -68,7 +68,7 @@ class Model(LightningModule):
     def validation_step(self, batch, batch_idx):
         x, y = batch
         criterion1 = nn.CrossEntropyLoss()
-        criterion2 = nn.BCELoss()
+      
         # _, y_hat = self(x)
         y_hat = self(x)
         # print(y_hat)
@@ -157,13 +157,13 @@ class Model(LightningModule):
 
     
     def train_dataloader(self):
-        return torch.utils.data.DataLoader(self.train_dataset, batch_size=8, shuffle=True)#,num_workers=2)
+        return torch.utils.data.DataLoader(self.train_dataset, batch_size=64, shuffle=True)#,num_workers=2)
 
     def test_dataloader(self):
-        return torch.utils.data.DataLoader(self.test_dataset, batch_size=8, shuffle=False)#,num_workers=2)
+        return torch.utils.data.DataLoader(self.test_dataset, batch_size=64, shuffle=False)#,num_workers=2)
 
     def val_dataloader(self):
-        return torch.utils.data.DataLoader(self.val_dataset, batch_size=8)#,num_workers=2)
+        return torch.utils.data.DataLoader(self.val_dataset, batch_size=64)#,num_workers=2)
 
 
 def main(args):
