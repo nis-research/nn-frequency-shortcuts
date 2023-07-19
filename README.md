@@ -21,7 +21,7 @@ cd nn-frequency-shortcuts
 ```
 
 * Installation
- * Python 3.9.12, cuda-11.3, cuda-11.3_cudnn-8.2
+	* Python 3.9.12, cuda-11.3, cuda-11.3_cudnn-8.2
 
 ```
 pip install -r requirements.txt
