@@ -26,6 +26,7 @@ cd nn-frequency-shortcuts
 		```
 		conda create -n virtualenv  python=3.9 anaconda
 		source activate virtualenv
+		conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
 
 		```
 

@@ -5,8 +5,8 @@
 #SBATCH --gres=gpu:1
 #SBATCH --mail-type=END,FAIL 
 #load modules
-module load nvidia/cuda-11.3
-module load nvidia/cuda-11.3_cudnn-8.2
+module load nvidia/cuda-11.7
+module load nvidia/cuda-11.x_cudnn-8.6
 module load anaconda3/2022.05
 
 #source activate
@@ -22,6 +22,6 @@ source activate debugenv
 
 
 python -u train.py --backbone_model alex  --lr 0.01 --save_dir results/retrain/synthetic_complex_special_1_par/  --dataset synthetic  --special _complex_special_1_par  --num_class 4 
-
+# python -u Evaluation/compute_ADCS.py
 
 conda deactivate
