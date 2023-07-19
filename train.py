@@ -4,7 +4,6 @@ import argparse
 import torchvision.transforms as transforms
 from torchvision.datasets import ImageFolder
 import os
-from datasets.CIFAR import CIFAR
 from datasets.Synthetic import Synthetic
 from pytorch_lightning.core.lightning import LightningModule
 import pytorch_lightning as pl

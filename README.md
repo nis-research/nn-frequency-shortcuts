@@ -29,10 +29,10 @@ cd nn-frequency-shortcuts
 		conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
 
 		```
-
-	```
-	pip install -r requirements.txt
-	```
+		* Install other packages
+		```
+		pip install -r requirements.txt
+		```
 * Datasets can be [dowloaded](https://drive.google.com/drive/folders/1Ug4WDwQWlFJpdks1woSsY6gWuSMYzNSB?usp=sharing) here
 
 * Computing DFM
