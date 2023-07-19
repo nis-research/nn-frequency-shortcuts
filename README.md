@@ -23,9 +23,9 @@ cd nn-frequency-shortcuts
 * Installation
 	* Python 3.9.12, cuda-11.3, cuda-11.3_cudnn-8.2
 
-```
-pip install -r requirements.txt
-```
+	```
+	pip install -r requirements.txt
+	```
 * Datasets can be [dowloaded](https://drive.google.com/drive/folders/1Ug4WDwQWlFJpdks1woSsY6gWuSMYzNSB?usp=sharing) here
 
 * Computing DFM
