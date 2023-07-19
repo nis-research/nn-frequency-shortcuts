@@ -36,19 +36,23 @@ cd nn-frequency-shortcuts
 * Datasets can be [dowloaded](https://drive.google.com/drive/folders/1Ug4WDwQWlFJpdks1woSsY6gWuSMYzNSB?usp=sharing) here
 
 * Computing DFM
+		
 ```
-python -u Evaluation/test_rank.py  --backbone_model resnet18 --model_path /checkpoints/last.ckpt     --patch_size 2   
+python -u Evaluation/test_rank.py  --backbone_model resnet18 --model_path /checkpoints/last.ckpt     --patch_size 1  
 
 ```
+
+* Visualizing DFMs
+```
+python -u Evaluation/visualize_DFM.py --DFMs resnet18_DFM_1
+```
+
 * Computing ADCS
 ```
 python -u Evaluation/compute_ADCS.py
 ```
 
-* Visualization
-```
-python -u Evaluation/visualize_DFM.py
-```
+
 
 * Training models
 ```

@@ -45,4 +45,4 @@ class AlexNet(nn.Module):
         enc = x.view(x.size(0), 256 * 2 * 2)
         prediction = self.classifier(enc)
         out = enc
-        return out,enc,prediction
+        return prediction

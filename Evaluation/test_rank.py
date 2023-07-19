@@ -1,4 +1,5 @@
 import sys
+import os
 import torch
 import torch.nn as nn
 from torchvision.transforms import transforms
@@ -8,6 +9,8 @@ import argparse
 from torchmetrics import ConfusionMatrix
 from train import Model
 import pickle
+import matplotlib.pyplot as plt 
+import numpy as np
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(device)
 
@@ -108,16 +111,34 @@ def main(args):
                         result_prediction.update({test_class:prection_matrix})
                         result_loss.update({test_class:loss_matrix})
          
-                  
-                  
-
-           
-      # with open(args.backbone_model+'prediction'+str(args.patch_size)+'.pkl', 'wb') as f:
-      #       pickle.dump(result_prediction, f)
-      # f.close()
-      with open(args.backbone_model+'loss'+str(args.patch_size)+'.pkl', 'wb') as f:
+      # loss matrix recording loss values when removing individual frequencies
+      m_path = args.backbone_model+'loss'+str(args.patch_size)+'.pkl'
+      with open(m_path, 'wb') as f:
             pickle.dump(result_loss, f)
       f.close()
+
+      with open(dir+m_path+'.pkl', 'rb') as f:
+            all_mask = pickle.load(f)
+  
+      # Thresholding the first X% frequencies the contribute more to classification
+      T = [0.01,.05,0.1,0.2]
+      for th in T:
+            mask_of_rank_th = {}
+            for mask_i in all_mask:
+                  map = np.array(all_mask[mask_i])
+                  print('class %d' %mask_i)
+                  ranking = ((sorted(list(np.sort(map,axis=None)))))
+                  
+                  t = (ranking[-int(th*(50176.0))])
+                  print(t)
+                  map[map<t] = 0
+                  map[map>=t] = 1
+            
+                  mask_of_rank_th.update({mask_i:map})
+            with open(args.backbone_model+'_DFM_'+str(int(th*100))+'.pkl', 'wb') as f:
+                  pickle.dump(mask_of_rank_th, f)
+            f.close()
+
       
 if __name__ == '__main__':
       parser = argparse.ArgumentParser()
@@ -128,9 +149,10 @@ if __name__ == '__main__':
       parser.add_argument('--patch_size', type=int, default=1,
                               help='patch_size')
       
-
-      
       args = parser.parse_args() 
+
+      if not os.path.exists('./DFMs'):
+        os.makedirs('./DFMs')
 
       main(args)
 

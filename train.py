@@ -4,22 +4,23 @@ import argparse
 import torchvision.transforms as transforms
 from torchvision.datasets import ImageFolder
 import os
-from datasets.Synthetic import Synthetic
 from pytorch_lightning.core.lightning import LightningModule
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint
 import torchmetrics
 import timm
-
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from pytorch_lightning.loggers.tensorboard import TensorBoardLogger
+import sys
+sys.path.insert(0,'/home/wangs1/nn-frequency-shortcuts/')
+from data.Synthetic import Synthetic
 import backbone.resnet as resnet
 import backbone.vgg as vgg
 import backbone.alexnet as alexnet
 
 
 class Model(LightningModule):
-    def __init__(self,backbone_model, lr,num_class,dataset,image_size):
+    def __init__(self,backbone_model, lr,num_class,dataset,image_size,special):
         super(Model, self).__init__()
         self.save_hyperparameters()
         self.lr = lr
@@ -30,6 +31,8 @@ class Model(LightningModule):
         self.num_class = num_class
         self.image_size = image_size
         self.backbone_model = backbone_model
+        self.special = special
+        
     def forward(self, x):
         # enc, prediction = self.backbone_model(x)
         prediction = self.backbone_model(x)
@@ -107,24 +110,7 @@ class Model(LightningModule):
         # return val_accuracy
 
     def setup(self, stage):
-        if self.dataset == 'cifar':
-            mean = [0.491400, 0.482158, 0.446531]
-            std = [0.247032, 0.243485, 0.261588]
-           
-
-            transform_train = transforms.Compose([
-                transforms.Pad(4),
-                transforms.RandomHorizontalFlip(),
-                transforms.RandomResizedCrop(self.image_size),
-                transforms.ToTensor(),
-                transforms.Normalize(mean, std)
-                # normalize
-            ])
-            transform=transforms.Compose([transforms.ToTensor(),transforms.Normalize(mean, std)])
-            data_train  = CIFAR('../datasets/',train=True,transform=transform_train)
-            data_test = CIFAR('../datasets',train=False,transform=transform)
-
-        elif self.dataset == 'synthetic':
+        if self.dataset == 'synthetic':
             transform_train = transforms.Compose([
                 transforms.Pad(4),
                 transforms.RandomHorizontalFlip(),
@@ -134,8 +120,8 @@ class Model(LightningModule):
                 # normalize
             ])
             transform=transforms.Compose([transforms.ToTensor(),transforms.Normalize([0.498, 0.498, 0.498], [0.172, 0.173042, 0.173])])
-            data_train  = Synthetic('../datasets',train=True,complex=self.special, transform=transform_train,band = self.band)
-            data_test = Synthetic('../datasets',train=False,complex=self.special, transform=transform,band = self.band)
+            data_train  = Synthetic('./data',train=True,complex=self.special, transform=transform_train,band = '')
+            data_test = Synthetic('./data',train=False,complex=self.special, transform=transform,band = '')
         elif self.dataset == 'imagenet10':
             transform_train = transforms.Compose([
                 transforms.Pad(4),
@@ -147,8 +133,8 @@ class Model(LightningModule):
                 # normalize
             ])
             transform=transforms.Compose([transforms.Resize((self.image_size,self.image_size)), transforms.ToTensor(),transforms.Normalize([0.479838, 0.470448, 0.429404], [0.258143, 0.252662, 0.272406])])
-            data_train  = ImageFolder('../datasets/ImageNet/train/',transform=transform_train)
-            data_test =  ImageFolder('../datasets/ImageNet/val/',transform=transform)
+            data_train  = ImageFolder('./data/ImageNet/train/',transform=transform_train)
+            data_test =  ImageFolder('./data/ImageNet/val/',transform=transform)
         elif self.dataset == 'imagenet10_style':
             transform_train = transforms.Compose([
                 transforms.Pad(4),
@@ -158,8 +144,8 @@ class Model(LightningModule):
                 transforms.Normalize([0.479838, 0.470448, 0.429404], [0.258143, 0.252662, 0.272406])
             ])
             transform=transforms.Compose([transforms.Resize((self.image_size,self.image_size)), transforms.ToTensor(),transforms.Normalize([0.479838, 0.470448, 0.429404], [0.258143, 0.252662, 0.272406])])
-            data_train  = ImageFolder('../datasets/ImageNet_style/train/',transform=transform_train)
-            data_test =  ImageFolder('../datasets/ImageNet_style/val/',transform=transform)
+            data_train  = ImageFolder('./data/ImageNet_style/train/',transform=transform_train)
+            data_test =  ImageFolder('./data/ImageNet_style/val/',transform=transform)
     
         # train/val split
         data_train2, data_val =  torch.utils.data.random_split(data_train, [int(len(data_train)*0.9), len(data_train)-int(len(data_train)*0.9)])
@@ -203,7 +189,7 @@ def main(args):
 
     logger = TensorBoardLogger(args.save_dir, name=args.backbone_model)
     
-    model = Model(backbone_model, args.lr,args.num_class,args.dataset,args.image_size,args.band, args.special)
+    model = Model(backbone_model, args.lr,args.num_class,args.dataset,args.image_size, args.special)
     maxepoch = 200
     checkpoints_callback = ModelCheckpoint(save_last=True,save_top_k=-1)
     trainer = pl.Trainer(enable_progress_bar=False,logger=logger, callbacks=[checkpoints_callback], gpus=-1, max_epochs=maxepoch) # accelerator='dp',
@@ -227,6 +213,8 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=float, default=0.001,
                     help='learning rate')            
     parser.add_argument('--save_dir', type=str, default='results/')
+    parser.add_argument('--special', required=False, default=None,
+                        help='selecting synthetic dataset')
    
     args = parser.parse_args()
     if not os.path.exists(args.save_dir+'/'+args.backbone_model):

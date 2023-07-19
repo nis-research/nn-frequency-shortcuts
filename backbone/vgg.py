@@ -20,7 +20,7 @@ class VGG(nn.Module):
         enc = F.avg_pool2d(out, out.size(2))
         enc = enc.view(enc.size(0), -1)
         prediction = self.classifier(enc)
-        return enc,prediction
+        return prediction
 
     def _make_layers(self, cfg):
         layers = []

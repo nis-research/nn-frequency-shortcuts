@@ -48,4 +48,4 @@ class ResNet(nn.Module):
         
         prediction = self.classifier(enc)
         # prediction = self.sm(prediction)
-        return enc, prediction
+        return  prediction
