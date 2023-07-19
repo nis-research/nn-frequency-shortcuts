@@ -16,8 +16,8 @@ that future research should focus on effective training schemes mitigating frequ
 
 * Clone this repository:
 ```
-git clone
-cd 
+git clone https://github.com/nis-research/nn-frequency-shortcuts.git
+cd nn-frequency-shortcuts
 ```
 
 * Installation
