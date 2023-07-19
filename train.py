@@ -232,6 +232,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     if not os.path.exists(args.save_dir+'/'+args.backbone_model):
         os.makedirs(args.save_dir+'/'+args.backbone_model)
-    
+    print('make the directory')
     
     main(args)

@@ -21,7 +21,7 @@ cd nn-frequency-shortcuts
 # python -u train.py --backbone_model alex  -lr 0.01 --dataset imagenet10   --save_dir /home/wangs1/HFC/results/imagenet10/  --image_size 224     --num_class 10             > /home/wangs1/HFC/results/imagenet10/alexen_AF_v1.out
 
 
-python -u train.py --backbone_model alex  --lr 0.01 --save_dir results/retrain/synthetic_complex_special_1_par/  --dataset synthetic  --special _complex_special_1_par  --num_class 4 > results/retrain/synthetic_complex_special_1_par/alexen_AF_v1.out
+python -u train.py --backbone_model alex  --lr 0.01 --save_dir results/retrain/synthetic_complex_special_1_par/  --dataset synthetic  --special _complex_special_1_par  --num_class 4 
 
 
 conda deactivate
