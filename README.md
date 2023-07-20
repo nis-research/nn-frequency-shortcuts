@@ -38,17 +38,17 @@ cd nn-frequency-shortcuts
 python -u Evaluation/compute_ADCS.py
 ```
 
-* Computing DFM
+* Computing DFM, e.g.
 		
 ```
 python -u Evaluation/test_rank.py  --backbone_model resnet18 --model_path /checkpoints/last.ckpt     --patch_size 1 
 ```
 
-* Visualizing DFMs
+* Visualizing DFMs, e.g. 
 ```
 python -u Evaluation/visualize_DFM.py --DFMs resnet18_DFM_1
 ```
-* Test on DFM-filtered datasets
+* Test on DFM-filtered datasets, e.g.
 ```
 python -u Evaluation/verify_mask_imgn.py  --backbone_model resnet18  --m_path  ./DFMs/resnet18_DFM_1   --model_path /checkpoints/last.ckpt  
 
@@ -57,7 +57,7 @@ python -u Evaluation/verify_mask_imgn.py  --backbone_model resnet18  --m_path  .
 
 
 
-* Training models
+* Training models, e.g. 
 	```
 	python -u train.py   --backbone_model resnet18 --lr 0.01 --dataset imagenet10   --save_dir results/  --image_size 224  --num_class 10    
 	```
