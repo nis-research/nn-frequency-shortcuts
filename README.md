@@ -59,7 +59,7 @@ python -u Evaluation/compute_ADCS.py
 	* Options for `--dataset`: synthetic, imagenet10
 	* Options for `--image_size 224`: 32, 224
 	* Options for `--num_class`: 4, 10
-	* There are four synthetic datasets, choosing dataset by adding arguement `--special _complex_special_1_par` for `$Syn_1$`, `--special _complex_special_2_par` for `$Syn_2$`, etc.
+	* There are four synthetic datasets, choosing dataset by adding arguement `--special _complex_special_1_par` for `Syn_1`, `--special _complex_special_2_par` for `Syn_2`, etc.
 
 ## Citation
 
