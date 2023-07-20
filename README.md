@@ -48,7 +48,7 @@ python -u Evaluation/test_rank.py  --backbone_model resnet18 --model_path /check
 ```
 python -u Evaluation/visualize_DFM.py --DFMs resnet18_DFM_1
 ```
-* Test on DFM-filtered datasets, e.g.
+* Testing on DFM-filtered datasets, e.g.
 ```
 python -u Evaluation/verify_mask_imgn.py  --backbone_model resnet18  --m_path  ./DFMs/resnet18_DFM_1   --model_path /checkpoints/last.ckpt  
 
@@ -58,11 +58,11 @@ python -u Evaluation/verify_mask_imgn.py  --backbone_model resnet18  --m_path  .
 
 
 * Training models, e.g. 
-	```
-	python -u train.py   --backbone_model resnet18 --lr 0.01 --dataset imagenet10   --save_dir results/  --image_size 224  --num_class 10    
-	```
+```
+python -u train.py   --backbone_model resnet18 --lr 0.01 --dataset imagenet10   --save_dir results/  --image_size 224  --num_class 10    
+```
 	* Options for `--dataset`: synthetic, imagenet10
-	* Options for `--image_size 224`: 32, 224
+	* Options for `--image_size`: 32, 224
 	* Options for `--num_class`: 4, 10
 	* There are four synthetic datasets, choosing dataset by adding arguement `--special _complex_special_1_par` for `Syn_1`, `--special _complex_special_2_par` for `Syn_2`, etc.
 
