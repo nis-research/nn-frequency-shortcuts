@@ -21,15 +21,15 @@ cd nn-frequency-shortcuts
 ```
 
 * Installation
-	* Python 3.9.12, cuda-11.3, cuda-11.3_cudnn-8.2
+	* Python 3.9.12, cuda-11.7, cuda-11.x_cudnn-8.6
 		* You can create a virtual environment with conda and activate the environment before the next step
-		```
-		conda create -n virtualenv  python=3.9 anaconda
-		source activate virtualenv
-		conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
+			```
+			conda create -n virtualenv  python=3.9 anaconda
+			source activate virtualenv
+			conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
 
-		```
-		* Install other packages
+			```
+	* Install other packages
 		```
 		pip install -r requirements.txt
 		```

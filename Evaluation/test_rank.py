@@ -1,4 +1,3 @@
-import sys
 import os
 import torch
 import torch.nn as nn
@@ -9,7 +8,6 @@ import argparse
 from torchmetrics import ConfusionMatrix
 from train import Model
 import pickle
-import matplotlib.pyplot as plt 
 import numpy as np
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(device)
@@ -35,7 +33,7 @@ def main(args):
       transform=transforms.Compose([transforms.Resize((size,size)), transforms.ToTensor(),transforms.Normalize([0.479838, 0.470448, 0.429404], [0.258143, 0.252662, 0.272406])])
       # Model performance on the original test set
       Matrix1 = torch.zeros((10,10))
-      data_test =  ImageFolder('./datasets/ImageNet/val/',transform=transform)
+      data_test =  ImageFolder('./data/ImageNet/val/',transform=transform)
       test_loader = torch.utils.data.DataLoader(data_test, batch_size= 32, shuffle=False,num_workers=4)
       for x, y in test_loader:
             x, y = x.to(device), y.to(device)
