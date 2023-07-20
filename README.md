@@ -27,7 +27,6 @@ cd nn-frequency-shortcuts
 			conda create -n virtualenv  python=3.9 anaconda
 			source activate virtualenv
 			conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
-
 			```
 	* Install other packages
 		```
@@ -38,8 +37,7 @@ cd nn-frequency-shortcuts
 * Computing DFM
 		
 ```
-python -u Evaluation/test_rank.py  --backbone_model resnet18 --model_path /checkpoints/last.ckpt     --patch_size 1  
-
+python -u Evaluation/test_rank.py  --backbone_model resnet18 --model_path /checkpoints/last.ckpt     --patch_size 1 
 ```
 
 * Visualizing DFMs
@@ -55,9 +53,9 @@ python -u Evaluation/compute_ADCS.py
 
 
 * Training models
-```
-python -u train.py   --backbone_model resnet18 --lr 0.01 --dataset imagenet10   --save_dir results/  --image_size 224  --num_class 10    
-```
+	```
+	python -u train.py   --backbone_model resnet18 --lr 0.01 --dataset imagenet10   --save_dir results/  --image_size 224  --num_class 10    
+	```
 	* Options for `--dataset`: synthetic, imagenet10
 	* Options for `--image_size 224`: 32, 224
 	* Options for `--num_class`: 4, 10
