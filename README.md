@@ -33,6 +33,10 @@ cd nn-frequency-shortcuts
 		pip install -r requirements.txt
 		```
 * Datasets can be [dowloaded](https://drive.google.com/drive/folders/1Ug4WDwQWlFJpdks1woSsY6gWuSMYzNSB?usp=sharing) here
+* Computing ADCS
+```
+python -u Evaluation/compute_ADCS.py
+```
 
 * Computing DFM
 		
@@ -44,11 +48,12 @@ python -u Evaluation/test_rank.py  --backbone_model resnet18 --model_path /check
 ```
 python -u Evaluation/visualize_DFM.py --DFMs resnet18_DFM_1
 ```
+* Test on DFM-filtered datasets
+```
+python -u Evaluation/verify_mask_imgn.py  --backbone_model resnet18  --m_path  ./DFMs/resnet18_DFM_1   --model_path /checkpoints/last.ckpt  
 
-* Computing ADCS
 ```
-python -u Evaluation/compute_ADCS.py
-```
+
 
 
 

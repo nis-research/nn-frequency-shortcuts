@@ -17,12 +17,16 @@ echo $SLURM_NODELIST
 cd nn-frequency-shortcuts
 source activate debugenv
 
-# python -u Evaluation/visualize_DFM.py --DFMs resnet18_DFM_1
+
+
 
 python -u Evaluation/test_rank.py  --backbone_model resnet18 --model_path results/imagenet10/resnet18/version_0/checkpoints/last.ckpt     --patch_size  7  
 
+
+# python -u Evaluation/visualize_DFM.py --DFMs resnet18_DFM_1
 # python -u train.py --backbone_model resnet18  --lr 0.01 --dataset imagenet10   --save_dir results/imagenet10/  --image_size 224     --num_class 10            
 # python -u train.py --backbone_model alex  --lr 0.01 --save_dir results/syn1/  --dataset synthetic   --num_class 4  --special _complex_special_1_par 
 # python -u Evaluation/compute_ADCS.py
+# python -u Evaluation/verify_mask_imgn.py  --backbone_model resnet18  --m_path  ./DFMs/resnet18_DFM_1   --model_path results/imagenet10/resnet18/version_0/checkpoints/last.ckpt  
 
 conda deactivate
