@@ -1,5 +1,5 @@
 ## Official website of 'What do neural networks learn in image classification? A frequency shortcut perspective (Paper accepted at ICCV2023)'
-#### The paper is available on [arXiv]().
+#### The paper is available on [arXiv](https://arxiv.org/abs/2307.09829).
 
 ### Introduction
 
@@ -64,7 +64,13 @@ python -u Evaluation/compute_ADCS.py
 ## Citation
 
 ```
-@misc{
+@misc{wang2023neural,
+      title={What do neural networks learn in image classification? A frequency shortcut perspective}, 
+      author={Shunxin Wang and Raymond Veldhuis and Christoph Brune and Nicola Strisciuglio},
+      year={2023},
+      eprint={2307.09829},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
 }
 ```
 

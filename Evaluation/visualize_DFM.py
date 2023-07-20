@@ -5,8 +5,6 @@ import numpy as np
 
 def main(args):
     dir = './DFMs/'
-    
-   
     imagenet_classes = ['Airliner','Wagon','Humming\n Bird','Siamese\n Cat','Ox','Golden\n Retriever','Tailed\n Frog','Zebra','Container\n Ship','Trailer\n Truck']
     m_path = args.DFMs+'.pkl'
     with open(dir+m_path, 'rb') as f:

@@ -6,9 +6,13 @@ from torchvision.datasets import ImageFolder
 import torch.fft as fft
 import argparse
 from torchmetrics import ConfusionMatrix
-from train import Model
 import pickle
 import numpy as np
+
+import sys
+sys.path.insert(0,'/home/wangs1/nn-frequency-shortcuts/')
+from train import Model
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(device)
 
@@ -16,9 +20,9 @@ def main(args):
       model_path = args.model_path
 
       if args.backbone_model == 'resnet18':
-            from HFC.blocks.resnet.Blocks import BasicBlock
+            from blocks.resnet.Blocks import BasicBlock
       elif args.backbone_model == 'resnet50':
-            from HFC.blocks.resnet.Blocks import Bottleneck
+            from blocks.resnet.Blocks import Bottleneck
          
 
 
@@ -37,8 +41,7 @@ def main(args):
       test_loader = torch.utils.data.DataLoader(data_test, batch_size= 32, shuffle=False,num_workers=4)
       for x, y in test_loader:
             x, y = x.to(device), y.to(device)
-            _, y_hat = encoder(x)
-
+            y_hat = encoder(x)
             Matrix1 += confmat(y_hat.cpu(), y.cpu())
       print(Matrix1)
       
@@ -84,7 +87,7 @@ def main(args):
                                     x1 = torch.real(x1)
                                     x1 = torch.Tensor(x1).to(device)
                                  
-                                    _, y_hat = encoder(x1)
+                                    y_hat = encoder(x1)
                                     _, predicted = torch.max(y_hat.data,1)
 
                                     correct_predictions = (predicted == y.to(device))

@@ -17,6 +17,8 @@ echo $SLURM_NODELIST
 cd nn-frequency-shortcuts
 source activate debugenv
 
+# python -u Evaluation/visualize_DFM.py --DFMs resnet18_DFM_1
+
 python -u Evaluation/test_rank.py  --backbone_model resnet18 --model_path results/imagenet10/resnet18/version_0/checkpoints/last.ckpt     --patch_size  7  
 
 # python -u train.py --backbone_model resnet18  --lr 0.01 --dataset imagenet10   --save_dir results/imagenet10/  --image_size 224     --num_class 10            
