@@ -18,7 +18,7 @@ print(device)
 
 def main(args):
       model_path = args.model_path
-
+      dir = './DFMs/'
       if args.backbone_model == 'resnet18':
             from blocks.resnet.Blocks import BasicBlock
       elif args.backbone_model == 'resnet50':
@@ -114,11 +114,11 @@ def main(args):
          
       # loss matrix recording loss values when removing individual frequencies
       m_path = args.backbone_model+'loss'+str(args.patch_size)+'.pkl'
-      with open(m_path, 'wb') as f:
+      with open(dir+m_path, 'wb') as f:
             pickle.dump(result_loss, f)
       f.close()
 
-      with open(dir+m_path+'.pkl', 'rb') as f:
+      with open(dir+m_path, 'rb') as f:
             all_mask = pickle.load(f)
   
       # Thresholding the first X% frequencies the contribute more to classification
@@ -136,7 +136,7 @@ def main(args):
                   map[map>=t] = 1
             
                   mask_of_rank_th.update({mask_i:map})
-            with open(args.backbone_model+'_DFM_'+str(int(th*100))+'.pkl', 'wb') as f:
+            with open(dir+args.backbone_model+'_DFM_'+str(int(th*100))+'.pkl', 'wb') as f:
                   pickle.dump(mask_of_rank_th, f)
             f.close()
 
