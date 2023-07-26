@@ -46,11 +46,11 @@ for x,y in test_loader:
     for j in range(3):
         y1[:,:,j] = fft.fftshift(fft.fft2(x1[j,:,:]))
     y1[y1==0] = 12e-12
-    log_y1 = np.abs(y1)
+    abs_y1 = np.abs(y1)
     if y.item()  in Energy:
-        Energy[y.item()] += log_y1
+        Energy[y.item()] += abs_y1
     else:
-        Energy.update({y.item():log_y1})
+        Energy.update({y.item():abs_y1})
 
 
 fig, axs = plt.subplots(2,5,sharex=True,sharey=True)
