@@ -69,13 +69,11 @@ python -u Evaluation/verify_mask_imgn.py  --backbone_model resnet18  --m_path  .
 ## Citation
 
 ```
-@misc{wang2023neural,
-      title={What do neural networks learn in image classification? A frequency shortcut perspective}, 
+@InProceedings{wang2023neural,
+    title={What do neural networks learn in image classification? A frequency shortcut perspective}, 
       author={Shunxin Wang and Raymond Veldhuis and Christoph Brune and Nicola Strisciuglio},
-      year={2023},
-      eprint={2307.09829},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
+    booktitle = {International Conference on Computer Vision (ICCV)},
+    year      = {2023},
 }
 ```
 
