@@ -61,7 +61,7 @@ def main(args):
             
                   for c in range(int(image_size/patch_size/2)+1):
                         mask = torch.ones((image_size,image_size))
-                        mask[patch_size*0:patch_size*(0+1),int(image_size/2+patch_size):]=0 
+                        #mask[patch_size*0:patch_size*(0+1),int(image_size/2+patch_size):]=0 
 
                         mask[patch_size*r:patch_size*(r+1),patch_size*c:patch_size*(c+1)] =  0
                         if int(image_size/patch_size)-r<int(image_size/patch_size) and int(image_size/patch_size)-c<int(image_size/patch_size):
